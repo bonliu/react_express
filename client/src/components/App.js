@@ -9,7 +9,8 @@ import '../styles/App.css';
 
 import Login from './Login';
 import Signup from './Signup';
-import Profile from './Profile';
+// import Profile from './Profile';
+import Porfolio from './Portfolio';
 
 class App extends React.Component {
   state = {
@@ -56,7 +57,8 @@ class App extends React.Component {
         <Switch>
           <Route path="/" exact component={Login}></Route>
           <Route path="/signup" component={Signup}></Route>
-          <Route path="/profile" component={Profile}></Route>
+          <Route path="/portfolio" component={Porfolio}></Route>
+          {/* <Route path="/profile" component={Profile}></Route> */}
         </Switch>
       </Router>
       // <div className="App">

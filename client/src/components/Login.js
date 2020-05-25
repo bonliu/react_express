@@ -1,5 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
+
 // import {
 //     BrowserRouter as Router,
 //     Switch,
@@ -13,10 +14,14 @@ import { Redirect } from 'react-router-dom';
 // import './Login.css';
 
 class Login extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     state = {
         email: '',
         password: '',
         responseToPost: '',
+        balance: 0,
         authenticate: false
     };
 
@@ -29,7 +34,7 @@ class Login extends React.Component {
             },
             body: JSON.stringify({
                 email: this.state.email,
-                password: this.state.password,
+                password: this.state.password
             }),
         });
         
@@ -38,15 +43,35 @@ class Login extends React.Component {
         // console.log(body.message)
         if (body.message === 'success') {
             this.setState({ authenticate: true });
+            // console.log(body.data[0].balance_in_cent);
+            // console.log(body.data.balance_in_cent);
+            // this.setState({ balance: body.data[0].balance_in_cent });
         } else {
             alert("Account doesn't exist.")
         }
     }
 
+    // componentDidMount() {
+    //     this.handleSubmit()
+    //       .then(res => {
+    //         const someData = res.balance;
+    //         this.setState({ balance: someData });
+    //       })
+    //   };
+
     render() {
         // const { response } = this.state;
         if (this.state.authenticate) {
-            return (<Redirect to="/profile"></Redirect>);
+            this.props.history.push({
+                pathname: "/portfolio",
+                state: {
+                    key: this.state.email
+                }
+            });
+            // return (<Redirect to={{
+            //     pathname: "/portfolio",
+            //     state: { id: 1}
+            // }}></Redirect>);
         }
 
         return (
